@@ -37,12 +37,12 @@ build: ## Build all binary files based on directory `./cmd/`
 
 .PHONY: install_locally
 install_locally: ## Move all built files to the local terraform installation
-	 @mkdir -p ~/.terraform.d/plugins/darwin_amd64 ; \
- 	 mkdir -p ~/.terraform.d/plugins/linux_amd64 ; \
- 	 mkdir -p ~/.terraform.d/plugins/windows_amd64 ; \
-     mv ./bin/darwin/amd64/terraform-provider-s3bucketnotification ~/.terraform.d/plugins/darwin_amd64/; \
-     mv ./bin/linux/amd64/terraform-provider-s3bucketnotification ~/.terraform.d/plugins/linux_amd64/; \
-     mv ./bin/windows/amd64/terraform-provider-s3bucketnotification ~/.terraform.d/plugins/windows_amd64/;
+	 @mkdir -p ~/.terraform.d/plugins/terraform.local/local/s3bucketnotification/1.0/darwin_amd64 ; \
+ 	 mkdir -p ~/.terraform.d/plugins/terraform.local/local/s3bucketnotification/1.0/linux_amd64 ; \
+ 	 mkdir -p ~/.terraform.d/plugins/terraform.local/local/s3bucketnotification/1.0/windows_amd64 ; \
+     mv ./bin/darwin/amd64/terraform-provider-s3bucketnotification ~/.terraform.d/plugins/terraform.local/local/s3bucketnotification/1.0/darwin_amd64/; \
+     mv ./bin/linux/amd64/terraform-provider-s3bucketnotification ~/.terraform.d/plugins/terraform.local/local/s3bucketnotification/1.0/linux_amd64/; \
+     mv ./bin/windows/amd64/terraform-provider-s3bucketnotification ~/.terraform.d/plugins/terraform.local/local/s3bucketnotification/1.0/windows_amd64/;
 
 
 .PHONY: upgrade
