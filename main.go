@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Regis24GmbH/terraform-s3bucket-notifications/internal/pkg/provider"
+	"github.com/Regis24GmbH/terraform-provider-s3bucketnotification/internal/pkg/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 )
 
