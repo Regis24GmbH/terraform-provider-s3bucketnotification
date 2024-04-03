@@ -34,8 +34,8 @@ func New() *schema.Provider {
 			"role_arn": {
 				Type:        schema.TypeString,
 				Required:    true,
-				DefaultFunc: schema.EnvDefaultFunc("AWS_DEFAULT_REGION", "eu-west-1"),
-				Description: "The region to send requests to. This should be a valid AWS region such as 'us-east-1'.",
+				DefaultFunc: schema.EnvDefaultFunc("AWS_ROLE_ARN", ""),
+				Description: "The ARN of the role to assume",
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
