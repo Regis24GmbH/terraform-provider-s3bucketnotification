@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 	"github.com/Regis24GmbH/terraform-provider-s3bucketnotification/internal/pkg/client"
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -17,15 +18,12 @@ func resourceS3BucketNotification() *schema.Resource {
 	return ResourceS3BucketNotificationSchema()
 }
 
-func resourceS3BucketNotificationCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+func resourceS3BucketNotificationCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	// Implement your resource creation logic here
 	log.Printf("[INFO] Create S3BucketNotification: %s", d.Get("bucket").(string))
-	providerConfig := m.(*schema.Provider)
-	accessKey, _ := providerConfig.Schema["access_key"].DefaultFunc()
-	secretKey, _ := providerConfig.Schema["secret_key"].DefaultFunc()
-	region, _ := providerConfig.Schema["region"].DefaultFunc()
+	sess := meta.(*session.Session)
 
-	s3Client := client.NewClientWithCredentials(accessKey.(string), secretKey.(string), region.(string))
+	s3Client := client.NewClient(sess)
 	bucketNotificationConfiguration, err := s3Client.GetBucketNotification(d.Get("bucket").(string))
 	if err != nil {
 		return diag.FromErr(err)

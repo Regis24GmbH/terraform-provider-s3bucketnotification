@@ -2,7 +2,6 @@ package client
 
 import (
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 )
@@ -11,13 +10,8 @@ type S3Client struct {
 	svc *s3.S3
 }
 
-// NewClientWithCredentials creates a new S3Client with credentials and region
-func NewClientWithCredentials(accessKey, secretKey, region string) *S3Client {
-	sess := session.Must(session.NewSession(&aws.Config{
-		Region:      aws.String(region),
-		Credentials: credentials.NewStaticCredentials(accessKey, secretKey, ""),
-	}))
-
+// NewClient creates a new S3Client with session
+func NewClient(sess *session.Session) *S3Client {
 	svc := s3.New(sess)
 
 	return &S3Client{
